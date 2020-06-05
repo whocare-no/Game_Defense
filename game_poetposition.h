@@ -9,7 +9,7 @@ public:
     bool poetexitd();
     void getExistence(bool b);
     bool Pointcontained(QPoint x);
-
+    QPoint getPos();
 protected:
     QPoint pos;
     bool poetexistenxe;

@@ -21,3 +21,7 @@ void game_poetposition::getExistence(bool b)
 {
     poetexistenxe=b;
 }
+QPoint game_poetposition::getPos()
+{
+    return pos;
+}

@@ -30,7 +30,8 @@ SOURCES += \
     game_begin.cpp \
     game_poet.cpp \
     game_poetposition.cpp \
-    game_enemy.cpp
+    game_enemy.cpp \
+    game_bullet.cpp
 
 
 HEADERS += \
@@ -38,7 +39,8 @@ HEADERS += \
     game_begin.h \
     game_poet.h \
     game_poetposition.h \
-    game_enemy.h
+    game_enemy.h \
+    game_bullet.h
 
 
 FORMS += \
