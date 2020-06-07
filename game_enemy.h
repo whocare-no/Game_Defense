@@ -7,7 +7,6 @@ class game_enemy : public QObject
     Q_OBJECT
 public:
     explicit game_enemy(QObject *parent = nullptr);
-
     void move();
     void draw(QPainter *);
     void birth();

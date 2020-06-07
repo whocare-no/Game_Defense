@@ -28,6 +28,7 @@ public:
     void attakEnemy();
     void drawBullet(QPainter *);
     void setPos(QPoint x);
+    int getExp();
     bool hastarget=false;
 
     double getLength(game_enemy *enemy);

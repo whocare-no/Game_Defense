@@ -47,9 +47,9 @@ void game_enemy::birth()
     enemyLive=true;
     m_pos=entrance[t];
     if(t==1)
-    m_figure.load("../Defense_Game/Resource/11.png");
+    m_figure.load("../Defense_Game/Resource/21.png");
     else if(t==0)
-        m_figure.load("../Defense_Game/Resource/08.png");
+        m_figure.load("../Defense_Game/Resource/22.png");
 }
 bool game_enemy::Live()
 {

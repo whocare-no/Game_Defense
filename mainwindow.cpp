@@ -1,10 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include<QPainter>
 #include<QDebug>
-#include<QMouseEvent>
 
 #define WAVE 20
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),c(386,281)
@@ -16,7 +15,9 @@ MainWindow::MainWindow(QWidget *parent) :
     id2=startTimer(2000);
     id3=startTimer(30000);
     id4=startTimer(50);
-
+    QMediaPlayer *music1 =new QMediaPlayer();
+    music1->setMedia(QUrl("../Defense_Game/Resource/music1.mp3"));
+    music1->play();
 }
 MainWindow::~MainWindow()
 {
@@ -32,21 +33,20 @@ void MainWindow::paintEvent(QPaintEvent *)
 {
 
     QPainter painter(this);
+    drawMoney();
+    drawExp();
     QPixmap map;
     map.load("../Defense_Game/Resource/map.png");
-    painter.drawPixmap(0,0,map);
-    drawMoney(&painter);
+    painter.drawPixmap(0,0,map);    
     if(_c.existed()==true)
         _c.drawPoet(&painter);
     for (int i=0;i<16;i++) {
-        if(pos[i].poetexitd()==true)
+        if(pos[i].poetexitd()==true&&poet[i].existed()==true)
         poet[i].drawPoet(&painter);
     }
     for(int i=0;i<16;i++)
     {
-        if(poet[i].existed()==true&&poet[i].poetdrawed==false)
-        poet[i].drawPoet(&painter);
-        else if(poet[i].existed()==true&&poet[i].poetdrawed==true)
+        if(poet[i].existed()==true&&poet[i].poetdrawed==true)
             poet[i].drawRange(&painter);
     }
     for(int i=0;i<16;i++)
@@ -72,9 +72,11 @@ void MainWindow::paintEvent(QPaintEvent *)
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
     QPoint pressPos = event->pos();
-    if(abs(pressPos.x()-c.x())<5&&abs(pressPos.y()-c.y())<5&&canBuy())
-    {
 
+    if(event->button()==Qt::LeftButton&&abs(pressPos.x()-c.x())<5&&abs(pressPos.y()-c.y())<5&&canBuy())
+    {
+       if(flag==true)
+           Exp+=_c.getExp();
        t=rand()%100;
        _c.getType(t);
        _c.getFigure();
@@ -84,7 +86,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
         update();
      }
     for (int i=0;i<16;i++) {
-        if(pos[i].Pointcontained(pressPos)==true&&pos[i].poetexitd()==false&&flag==true)
+        if(event->button()==Qt::LeftButton&&pos[i].Pointcontained(pressPos)==true&&pos[i].poetexitd()==false&&flag==true)
         {
             poet[i].getType(t);
             poet[i].getFigure();
@@ -94,15 +96,21 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
             flag=false;
             update();
         }
-        else if(pos[i].Pointcontained(pressPos)==true&&pos[i].poetexitd()==true&&poet[i].poetdrawed==false)
+        else if(event->button()==Qt::LeftButton&&pos[i].Pointcontained(pressPos)==true&&pos[i].poetexitd()==true&&poet[i].poetdrawed==false)
         {
             poet[i].poetdrawed=true;
             update();
         }
-        else if(pos[i].Pointcontained(pressPos)==true&&pos[i].poetexitd()==true&&poet[i].poetdrawed==true)
+        else if(event->button()==Qt::LeftButton&&pos[i].Pointcontained(pressPos)==true&&pos[i].poetexitd()==true&&poet[i].poetdrawed==true)
         {
             poet[i].poetdrawed=false;
             update();
+        }
+        else if(event->button()==Qt::RightButton&&pos[i].Pointcontained(pressPos)==true&&pos[i].poetexitd()==true)
+        {
+            poet[i].unbuild();
+            pos[i].getExistence(false);
+            Exp+=poet[i].getExp();
         }
     }
 }
@@ -176,8 +184,30 @@ bool MainWindow::canBuy()
         return true;
     return false;
 }
-void MainWindow::drawMoney(QPainter *painter)
+void MainWindow::drawMoney()
 {
-    painter->setPen(QPen(Qt::black));
-    painter->drawText(QRect(200,5,200,25),QString("g:%1").arg(Money));
+    QFont ft;
+    ft.setPointSize(6);
+    QPalette label_pe;
+    label_pe.setColor(QPalette::WindowText, Qt::yellow);
+    ui->label->setPalette(label_pe);
+    ui->label->setGeometry(309,232,30,9);
+    ui->label->setFont(ft);
+    ui->label->setNum(Money);
+}
+void MainWindow::drawExp()
+{
+    QFont ft,ft1;
+    ft.setPointSize(7);
+    ft1.setPointSize(7);
+    QPalette label_pe;
+    label_pe.setColor(QPalette::WindowText, Qt::blue);
+    ui->label_e->setPalette(label_pe);
+    ui->label_e->setGeometry(70,0,30,9);
+    ui->label_e->setFont(ft);
+    ui->label_->setFont(ft1);
+    ui->label_->setPalette(label_pe);
+    ui->label_->setGeometry(40,0,40,12);
+    ui->label_->setText("Exp:");
+    ui->label_e->setNum(Exp);
 }

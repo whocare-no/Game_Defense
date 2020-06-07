@@ -35,6 +35,7 @@ void game_poet::getFigure()
         Range=80;
         Damage=7;
         Rate=200;
+        exp=200;
     }
     else if(type>=3&&type<=5)
     {
@@ -42,6 +43,7 @@ void game_poet::getFigure()
         Range=120;
         Damage=10;
         Rate=500;
+        exp=200;
     }
     else if(type>=6&&type<=8)
     {
@@ -49,6 +51,7 @@ void game_poet::getFigure()
         Range=100;
         Damage=5;
         Rate=350;
+        exp=200;
     }
     else if(type>=9&&type<=11)
     {
@@ -56,6 +59,7 @@ void game_poet::getFigure()
         Range=100;
         Damage=5;
         Rate=350;
+        exp=200;
     }
     else if(type>=12&&type<=14)
     {
@@ -63,6 +67,7 @@ void game_poet::getFigure()
         Range=100;
         Damage=5;
         Rate=350;
+        exp=200;
     }
     else if(type>=15&&type<=24)
     {
@@ -70,6 +75,7 @@ void game_poet::getFigure()
         Range=100;
         Damage=5;
         Rate=350;
+        exp=100;
     }
     else if(type>=25&&type<=35)
     {
@@ -77,6 +83,7 @@ void game_poet::getFigure()
         Range=100;
         Damage=5;
         Rate=350;
+        exp=100;
     }
     else if(type>=36&&type<=47)
     {
@@ -84,6 +91,7 @@ void game_poet::getFigure()
         Range=100;
         Damage=5;
         Rate=350;
+        exp=100;
     }
     else if(type>=48&&type<=57)
     {
@@ -91,6 +99,7 @@ void game_poet::getFigure()
         Range=100;
         Damage=5;
         Rate=350;
+        exp=100;
     }
     else if(type>=58&&type<=64)
     {
@@ -98,6 +107,7 @@ void game_poet::getFigure()
         Range=100;
         Damage=5;
         Rate=350;
+        exp=150;
     }
     else if(type>=65&&type<=71)
     {
@@ -105,6 +115,7 @@ void game_poet::getFigure()
         Range=100;
         Damage=5;
         Rate=350;
+        exp=150;
     }
     else if(type>=72&&type<=78)
     {
@@ -112,6 +123,7 @@ void game_poet::getFigure()
         Range=100;
         Damage=5;
         Rate=350;
+        exp=150;
     }
     else if(type>=79&&type<=85)
     {
@@ -119,6 +131,7 @@ void game_poet::getFigure()
         Range=100;
         Damage=5;
         Rate=350;
+        exp=150;
     }
     else if(type>=86&&type<=93)
     {
@@ -126,6 +139,7 @@ void game_poet::getFigure()
         Range=100;
         Damage=5;
         Rate=350;
+        exp=150;
     }
     else if(type>=94&&type<=99)
     {
@@ -133,6 +147,7 @@ void game_poet::getFigure()
         Range=100;
         Damage=5;
         Rate=350;
+        exp=150;
     }
 }
 void game_poet::setPos(QPoint x)
@@ -216,5 +231,8 @@ void  game_poet::loseEnemy()
         hastarget=false;
         m_fireRateTimer->stop();
     }
-
+}
+int game_poet::getExp()
+{
+    return exp;
 }

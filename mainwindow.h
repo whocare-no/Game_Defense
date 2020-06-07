@@ -5,8 +5,9 @@
 #include<QLabel>
 #include<QtGui>
 #include<QTimer>
-#include<time.h>
 #include <QMainWindow>
+
+#include <QMediaPlayer>
 #include"game_poet.h"
 #include"game_poetposition.h"
 #include"game_enemy.h"
@@ -25,7 +26,8 @@ public:
     void mousePressEvent(QMouseEvent *event);
     void timerEvent(QTimerEvent *event);
     void waveLoad();
-    void drawMoney(QPainter *);
+    void drawMoney();
+    void drawExp();
     void poetgetPos();
     bool canBuy();
     ~MainWindow();
@@ -34,6 +36,7 @@ private:
     Ui::MainWindow *ui;
     QPoint c;
     int Money=2000;
+    int Exp=0;
     int Num=0;
     int t;
     bool timstart=false;
@@ -41,8 +44,7 @@ private:
     int missnum=0;
     bool flag=false;
     bool game_win=false;
-    bool m_gameWin;
-
+    bool m_gameWin;   
     game_poet poet[16];
 
     game_poetposition pos[16]={
@@ -64,7 +66,7 @@ private:
         game_poetposition(QPoint(304, 232))
     };
     game_poet _c;
-    //game_bullet bull[200];
+
     game_enemy enemy[40];
     int id1,id2,id3,id4;
 };
