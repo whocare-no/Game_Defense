@@ -2,11 +2,14 @@
 #define GAME_ENEMY_H
 #include <QObject>
 #include<QPainter>
+#include<QTimerEvent>
+
 class game_enemy : public QObject
 {
     Q_OBJECT
 public:
     explicit game_enemy(QObject *parent = nullptr);
+    //game_enemy(game_enemy &_enemy);
     void move();
     void draw(QPainter *);
     void birth();
@@ -14,26 +17,40 @@ public:
     bool Live();
     void getAttacked(int atk);
     QPoint getPos()const;
+    int getLength(QPoint pos)const ;
     void updata();
     bool dead=false;
     int t;
-    //void doActivate();
+    void getWaves(int m_wave);
+    void changeFigure(QString a);
+    void changeSp();
+    void changede();
+    void Effect();
+    void Effect(game_enemy enemy[40]);
+    void drawEffect(QPainter *);
+    bool INViNCIBILITY=false;
+    void timerEvent(QTimerEvent *event);
+    bool enemyMiss=false;
 protected:
     int max_hp;//hp=health point生命值
     int current_hp;
     int sp;//sp=speed速度
     int de;//de=defence防御
-    double dod;//dod=dodge rate闪避率
+    int dod;//dod=dodge rate闪避率
 
     int type;
-    //bool m_active;
+    int wave;
+    bool effectflag=false;
+    bool effect=true;
     bool enemyLive=false;
-    bool enemyMiss=false;
+
     QPixmap m_figure;
     QPoint m_pos;
     QPoint entrance[2];
-    //QPoint entrance2;
+
+
     QPoint exit;
+    int id1;
 };
 
 #endif

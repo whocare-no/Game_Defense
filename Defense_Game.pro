@@ -26,32 +26,38 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    game_end.cpp \
         main.cpp \
         mainwindow.cpp \
     game_begin.cpp \
     game_poet.cpp \
     game_poetposition.cpp \
     game_enemy.cpp \
-    game_bullet.cpp
+    game_bullet.cpp \
+    game_auxiliary.cpp
+
 
 
 HEADERS += \
+    game_end.h \
         mainwindow.h \
     game_begin.h \
     game_poet.h \
     game_poetposition.h \
     game_enemy.h \
-    game_bullet.h
+    game_bullet.h \
+    game_auxiliary.h
+
 
 
 FORMS += \
+    game_end.ui \
         mainwindow.ui \
-    game_begin.ui
+    game_begin.ui \
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-RESOURCES += \
-    source.qrc

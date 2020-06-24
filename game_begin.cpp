@@ -8,18 +8,28 @@ game_begin::game_begin(QWidget *parent) :
     ui(new Ui::game_begin)
 {
     ui->setupUi(this);
-    m= new MainWindow();
+
     play= new QPushButton();
-    QPixmap begin;
+    quit= new QPushButton();
+    hard=new QPushButton();
     QPixmap pl;
+    QPixmap qu;
+    QPixmap ha;
     pl.load("../Defense_Game/Resource/play.jpg");
+    qu.load("../Defense_Game/Resource/quit.png");
+    ha.load("../Defense_Game/Resource/hard.png");
     ui->play->setIcon(pl);
     ui->play->setMaximumSize(60,30);
     ui->play->setMinimumSize(60,30);
     ui->play->setIconSize(QSize(60,30));
-    begin.load("../Defense_Game/Resource/begin.png");
-    ui->label->setPixmap(begin);
-    ui->label->show();
+    ui->quit->setIcon(qu);
+    ui->quit->setMaximumSize(60,30);
+    ui->quit->setMinimumSize(60,30);
+    ui->quit->setIconSize(QSize(60,30));
+    ui->hard->setIcon(ha);
+    ui->hard->setMaximumSize(60,30);
+    ui->hard->setMinimumSize(60,30);
+    ui->hard->setIconSize(QSize(60,30));
 
 }
 
@@ -31,5 +41,25 @@ game_begin::~game_begin()
 void game_begin::on_play_clicked()
 {
     this->hide();
+    m=new MainWindow(1);
+    m->show();
+}
+void game_begin::on_quit_clicked()
+{
+    qApp->quit();
+
+}
+void game_begin::paintEvent(QPaintEvent *)
+{
+    QPainter painter(this);
+    QPixmap begin;
+    begin.load("../Defense_Game/Resource/begin.png");
+    painter.drawPixmap(0,0,begin);
+}
+
+void game_begin::on_hard_clicked()
+{
+    this->hide();
+    m=new MainWindow(2);
     m->show();
 }

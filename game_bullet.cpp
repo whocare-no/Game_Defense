@@ -1,17 +1,19 @@
 #include "game_bullet.h"
 
-game_bullet::game_bullet(QPoint s,QPoint t,game_enemy *enemy):startPos(s),targetPos(t),target(enemy)
+game_bullet::game_bullet(QPoint s,QPoint t,game_enemy *enemy,int atk):startPos(s),targetPos(t),damage(atk),target(enemy)
 {
-    damage=5;
+
     setCurrentPos(startPos);
     figure.load("../Defense_Game/Resource/1.png");
+    music=new QMediaPlayer();
+    music->setMedia(QUrl("../Defense_Game/Resource/bullet.mp3"));
 }
 void game_bullet::draw(QPainter *painter)
 {
     painter->save();
     static const QPoint offsetPoint(-10, -26);
-    //painter->translate(m_currentPos);
-    painter->drawPixmap(m_currentPos+offsetPoint,figure);
+    painter->translate(m_currentPos);
+    painter->drawPixmap(offsetPoint,figure);
     painter->restore();
 }
 void game_bullet::setCurrentPos(QPoint pos)
@@ -24,8 +26,6 @@ QPoint game_bullet::currentPos()
 }
 void game_bullet::move()
 {
-
-    // 100毫秒内击中敌人
     static const int duration = 1000;
     QPropertyAnimation *animation = new QPropertyAnimation;
     animation->setTargetObject(this);
@@ -40,8 +40,13 @@ void game_bullet::move()
 
 void game_bullet::Hit()
 {
-    target->getAttacked(damage);
-    //delete this;
+    if(target->Live()==true)
+    {
+        target->getAttacked(damage);
+        music->play();
+    }
+
+
 }
 QPoint game_bullet::getTargetPos()
 {
