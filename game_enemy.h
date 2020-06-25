@@ -3,7 +3,8 @@
 #include <QObject>
 #include<QPainter>
 #include<QTimerEvent>
-
+#include<iostream>
+using namespace std;
 class game_enemy : public QObject
 {
     Q_OBJECT
@@ -28,14 +29,13 @@ public:
     void Effect();
     void Effect(game_enemy enemy[40]);
     void drawEffect(QPainter *);
-    bool INViNCIBILITY=false;
+    bool INViNCIBILITY=false;//是否处于无敌状态
     void timerEvent(QTimerEvent *event);
     bool enemyMiss=false;
 protected:
     int max_hp;//hp=health point生命值
-    int current_hp;
+    int current_hp;//当前生命值
     int sp;//sp=speed速度
-    int de;//de=defence防御
     int dod;//dod=dodge rate闪避率
 
     int type;

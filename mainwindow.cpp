@@ -95,14 +95,14 @@ void MainWindow::paintEvent(QPaintEvent *)
             }
         }
     }
-
+    painter.drawPixmap(0,0,map);
     for(int i=0;i<2*WAVE;i++)
     {
 
         if(enemy[i].Live()==true)
         {
-            enemy[i].draw(&pluspainter);
-            enemy[i].drawEffect(&pluspainter);
+            enemy[i].draw(&painter);
+            enemy[i].drawEffect(&painter);
             if(enemy[i].t==1)
                 enemy[i].Effect(enemy);
             else if(enemy[i].t==0)
@@ -123,7 +123,7 @@ void MainWindow::paintEvent(QPaintEvent *)
         }
 
     }
-    painter.drawPixmap(0,0,map);
+
     drawMoney(&painter);
     drawExp(&painter);
     drawMissNum(&painter);
@@ -259,7 +259,7 @@ void MainWindow::timerEvent(QTimerEvent *event)
         timstart=true;
     }
     if(event->timerId()==id2&&timstart==true&&Num<2*WAVE){
-        int tt=rand()%20;
+        int tt=rand()%10;
         if(tt<=m_waves)
         {
             if(Num%4==2)

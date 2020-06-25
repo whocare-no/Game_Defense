@@ -7,10 +7,9 @@ game_enemy::game_enemy(QObject *parent) :
     entrance[0]=QPoint(425,150);
     entrance[1]=QPoint(425,170);
     exit=QPoint(60,160);
-    max_hp=40;
-    current_hp=40;
+
     sp=5;
-    de=0;
+
     srand(unsigned (time(nullptr)));
 
 }
@@ -50,7 +49,8 @@ void game_enemy::birth()
     {
          m_figure.load("../Defense_Game/Resource/21.png");
          dod=5+wave*2;
-
+         max_hp=40;
+         current_hp=40;
     }
     else if(t==0)
     {
@@ -63,6 +63,8 @@ void game_enemy::birth()
     {
          m_figure.load("../Defense_Game/Resource/23.png");
          dod=3+wave*2;
+         max_hp=40;
+         current_hp=40;
     }
     else if(t==3)
     {
@@ -94,7 +96,7 @@ void game_enemy::timerEvent(QTimerEvent *event)
       {
         effectflag=false;
         INViNCIBILITY=false;
-        de=0;
+
     }
 
 }
@@ -130,9 +132,8 @@ void game_enemy::getAttacked(int atk)
     int temp=rand()%100;
     if(temp>dod)
     {
-        if(atk<de)
-            de=atk;
-        current_hp-=(atk-de);
+        if(INViNCIBILITY==false)
+        current_hp-=atk;
     }
 
     if(current_hp<=0)
@@ -174,7 +175,6 @@ void game_enemy::Effect()
 {
     if(5*current_hp<=max_hp&&effect==true)
     {
-        de=99999;
         id1=startTimer(15000);
         effect=false;
         effectflag=true;
@@ -195,19 +195,18 @@ void game_enemy::Effect(game_enemy enemy[40])
     }
 
     if(num>=3)
-    {
+    {cout<<num<<endl;
         for(int i=0;i<40;i++)
         {
             if(enemy[i].Live()==true&&2*enemy[i].current_hp<max_hp&&getLength(enemy[i].getPos())<=2500)
             {
-
+                cout<<enemy[i].current_hp<<endl;
                 enemy[i].current_hp+=(max_hp/2);
 
             }
 
         }
         id1=startTimer(3000);
-
         effect=false;
         effectflag=true;
     }

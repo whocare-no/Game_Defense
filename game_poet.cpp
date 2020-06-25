@@ -356,6 +356,11 @@ void  game_poet::loseEnemy()
         hastarget=false;
         m_fireRateTimer->stop();
     }
+    else if(target->INViNCIBILITY==true)
+    {
+        hastarget=false;
+        m_fireRateTimer->stop();
+    }
     else if(getLength(target)>Range)
     {
         hastarget=false;
