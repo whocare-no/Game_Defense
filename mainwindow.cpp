@@ -105,7 +105,7 @@ void MainWindow::paintEvent(QPaintEvent *)
             enemy[i].drawEffect(&pluspainter);
             if(enemy[i].t==1)
                 enemy[i].Effect(enemy);
-            else
+            else if(enemy[i].t==0)
                 enemy[i].Effect();
 
         }
@@ -118,7 +118,7 @@ void MainWindow::paintEvent(QPaintEvent *)
         else if(enemy[i].dead==true)
         {
             music2->play();
-            Money+=100+(m_waves/10)*10-50*(Dificulty-1);
+            Money+=100+m_waves*10-50*(Dificulty-1);
             enemy[i].dead=false;
         }
 

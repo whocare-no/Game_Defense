@@ -8,9 +8,8 @@ class game_auxiliary:public game_poet
 {
 public:
     game_auxiliary();
-    void darwEffect(QPainter *);
-    void drawData(QPainter *);
 
+    void drawData(QPainter *);
     int Type()const;
 
 protected:
